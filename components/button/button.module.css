@@ -1,0 +1,19 @@
+.buttonContainer {
+  background-color: rgb(80, 72, 229);
+  padding: 8px 20px;
+  border-radius: 8px;
+  transition: background-color 0.1s ease-out;
+}
+
+.buttonContainer:hover {
+  background-color: rgb(56, 50, 160);
+  cursor: pointer;
+}
+
+.buttonTextContainer {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: white;
+  user-select: none;
+  text-align: center;
+}

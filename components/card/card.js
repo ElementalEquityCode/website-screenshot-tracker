@@ -1,10 +1,14 @@
 import styles from "./card.module.css";
+import PropTypes from "prop-types";
+import Chip from "../chip/chip";
 import ElementalWebDesignLogo from "../../assets/elemental-web-design-web-logo.png";
+import Link from "next/link";
 
 const Card = (props) => {
   const { logo } = props;
   const { websiteName } = props;
   const { description } = props;
+  const { link } = props;
 
   return (
     <div className={styles.cardContainer}>
@@ -12,9 +16,7 @@ const Card = (props) => {
         <img src={logo.src} className={styles.clientWebsiteLogo} />
       </div>
       <div className={styles.infoContainer}>
-        <div className={styles.websiteNameContainer}>
-          <h3 className={styles.websiteName}>{websiteName}</h3>
-        </div>
+        <Chip link={link}>{websiteName}</Chip>
         <p className={styles.description}>{description}</p>
         <div className={styles.companyInfoContainer}>
           <div className={styles.companyLogoImageContainer}>
@@ -36,6 +38,13 @@ const Card = (props) => {
       </div>
     </div>
   );
+};
+
+Card.propTypes = {
+  logo: PropTypes.object.isRequired,
+  websiteName: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
 };
 
 export default Card;
