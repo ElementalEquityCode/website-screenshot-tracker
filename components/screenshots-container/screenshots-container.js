@@ -1,6 +1,6 @@
 import styles from "./screenshots-container.module.css";
 import Button from "../button/button";
-import ScreenshotCard from "../button/screenshot-card/screenshot-card";
+import ScreenshotCard from "../screenshot-card/screenshot-card";
 
 const ScreenshotsContainer = () => {
   return (
@@ -10,9 +10,12 @@ const ScreenshotsContainer = () => {
         <Button>Fetch Screenshots</Button>
       </div>
       <div className={styles.gridContainer}>
-        <ScreenshotCard />
-        <ScreenshotCard />
-        <ScreenshotCard />
+        <ScreenshotCard size="fullPage" />
+        <ScreenshotCard size="width=1080&height=1920" />
+        <ScreenshotCard size="width=1080&height=1200" />
+        <ScreenshotCard size="width=1080&height=800" />
+        <ScreenshotCard size="width=1080&height=500" />
+        <ScreenshotCard size="width=1080&height=350" />
       </div>
     </div>
   );

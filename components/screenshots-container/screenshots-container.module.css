@@ -45,7 +45,6 @@
 }
 
 .gridContainer {
-  height: 500px;
   width: 100%;
   background-color: rgb(249, 250, 252);
   display: flex;
@@ -53,6 +52,7 @@
   justify-content: space-between;
   padding: 24px;
   box-sizing: border-box;
+  flex-wrap: wrap;
 }
 
 @media screen and (max-width: 800px) {
