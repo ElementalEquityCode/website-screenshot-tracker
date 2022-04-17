@@ -5,7 +5,6 @@ const WebsiteContext = React.createContext();
 const WebsiteContextProvider = (props) => {
   const [currentWebsiteName, setCurrentWebsiteName] = useState("");
   const [websiteHomePage, setWebsiteHomePage] = useState("");
-  const [linksToFetch, setLinksToFetch] = useState([]);
 
   const setNewWebsiteName = (value) => {
     setCurrentWebsiteName(value);
@@ -15,20 +14,14 @@ const WebsiteContextProvider = (props) => {
     setWebsiteHomePage(value);
   };
 
-  const setNewLinksToFetch = (value) => {
-    setLinksToFetch(value);
-  };
-
   const { children } = props;
   return (
     <WebsiteContext.Provider
       value={{
         currentWebsiteName,
         websiteHomePage,
-        linksToFetch,
+        setNewWebsiteName,
         setNewWebsiteHomePage,
-        setNewWebsiteHomePage,
-        setNewLinksToFetch,
       }}
     >
       {children}

@@ -1,14 +1,23 @@
+import { useContext } from "react";
 import styles from "./card.module.css";
 import PropTypes from "prop-types";
 import Chip from "../chip/chip";
 import ElementalWebDesignLogo from "../../assets/elemental-web-design-web-logo.png";
 import Link from "next/link";
+import WebsiteContext from "../../contexts/website";
 
 const Card = (props) => {
+  const websiteContext = useContext(WebsiteContext);
   const { logo } = props;
   const { websiteName } = props;
   const { description } = props;
   const { link } = props;
+  const { homepage } = props;
+
+  const linkClicked = () => {
+    websiteContext.setNewWebsiteName(websiteName);
+    websiteContext.setNewWebsiteHomePage(homepage);
+  };
 
   return (
     <div className={styles.cardContainer}>
@@ -16,7 +25,9 @@ const Card = (props) => {
         <img src={logo.src} className={styles.clientWebsiteLogo} />
       </div>
       <div className={styles.infoContainer}>
-        <Chip link={link}>{websiteName}</Chip>
+        <Chip handleClick={linkClicked} link={link}>
+          {websiteName}
+        </Chip>
         <p className={styles.description}>{description}</p>
         <div className={styles.companyInfoContainer}>
           <div className={styles.companyLogoImageContainer}>

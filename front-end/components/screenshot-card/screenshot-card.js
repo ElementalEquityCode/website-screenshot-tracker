@@ -10,15 +10,15 @@ const ScreenshotCard = (props) => {
 
   if (size === "fullPage") {
     sizeString = "Full Page";
-  } else if (size === "width=1080&height=1920") {
+  } else if (size === "width=1920&height=1080") {
     sizeString = "1920x1080";
-  } else if (size === "width=1080&height=1200") {
+  } else if (size === "width=1200&height=1080") {
     sizeString = "1200x1080";
-  } else if (size === "width=1080&height=800") {
+  } else if (size === "width=880&height=1080") {
     sizeString = "800x1080";
-  } else if (size === "width=1080&height=500") {
+  } else if (size === "width=500&height=1080") {
     sizeString = "500x1080";
-  } else if (size === "width=1080&height=350") {
+  } else if (size === "width=350&height=1080") {
     sizeString = "350x1080";
   }
 
@@ -38,7 +38,7 @@ const ScreenshotCard = (props) => {
 
 ScreenshotCard.propTypes = {
   size: PropTypes.string.isRequired,
-  imageSource: PropTypes.string.isRequired,
+  imageSource: PropTypes.string,
 };
 
 export default ScreenshotCard;

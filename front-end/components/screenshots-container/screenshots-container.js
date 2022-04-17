@@ -1,21 +1,37 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import Link from "next/link";
 import styles from "./screenshots-container.module.css";
 import Button from "../button/button";
 import ScreenshotCard from "../screenshot-card/screenshot-card";
 import axios from "axios";
+import WebsiteContext from "../../contexts/website";
 
 const ScreenshotsContainer = () => {
+  const websiteContext = useContext(WebsiteContext);
+  const homepage = websiteContext.websiteHomePage;
   const [screenshots, setScreenshots] = useState(["", "", "", "", "", ""]);
+  const sizes = [
+    "fullPage=true",
+    "width=1920&height=1080",
+    "width=1200&height=1080",
+    "width=880&height=1080",
+    "width=500&height=1080",
+    "width=350&height=1080",
+  ];
   const [isPerformingRequest, setPerformingRequest] = useState(false);
 
   const fetchScreenshots = () => {
     setPerformingRequest(true);
-
     const screenshotsCopy = [];
+
     for (let i = 0; i < 6; i += 1) {
       axios
-        .get("http://localhost:8080/take-screenshot")
+        .post(`http://localhost:8080/take-screenshot`, {
+          size: sizes[i],
+          website: homepage,
+        })
         .then((response) => {
+          console.log(response.data);
           screenshotsCopy[i] = response.data.imageURL;
           if (i === 5) {
             setScreenshots(screenshotsCopy);
@@ -32,38 +48,48 @@ const ScreenshotsContainer = () => {
   };
 
   return (
-    <div className={styles.screenshotsContainer}>
-      <div className={styles.websiteNameContainer}>
-        <h2 className={styles.websiteName}>Website Name Here</h2>
-        <Button
-          onClick={fetchScreenshots}
-          setButtonLoading={isPerformingRequest}
-        >
-          Fetch Screenshots
-        </Button>
-      </div>
-      <div className={styles.gridContainer}>
-        <ScreenshotCard imageSource={screenshots[0]} size="fullPage" />
-        <ScreenshotCard
-          imageSource={screenshots[1]}
-          size="width=1080&height=1920"
-        />
-        <ScreenshotCard
-          imageSource={screenshots[2]}
-          size="width=1080&height=1200"
-        />
-        <ScreenshotCard
-          imageSource={screenshots[3]}
-          size="width=1080&height=800"
-        />
-        <ScreenshotCard
-          imageSource={screenshots[4]}
-          size="width=1080&height=500"
-        />
-        <ScreenshotCard
-          imageSource={screenshots[5]}
-          size="width=1080&height=350"
-        />
+    <div className={styles.mainContainer}>
+      <Link href="/">
+        <div className={styles.returnArrow}>←</div>
+      </Link>
+      <div className={styles.screenshotsContainer}>
+        <div className={styles.websiteNameContainer}>
+          <h2 className={styles.websiteName}>
+            {websiteContext.currentWebsiteName ?? null}
+          </h2>
+          <Button
+            onClick={fetchScreenshots}
+            setButtonLoading={isPerformingRequest}
+          >
+            Fetch Screenshots
+          </Button>
+        </div>
+        <div className={styles.gridContainer}>
+          <ScreenshotCard
+            imageSource={screenshots[0] ?? null}
+            size="fullPage"
+          />
+          <ScreenshotCard
+            imageSource={screenshots[1] ?? null}
+            size="width=1920&height=1080"
+          />
+          <ScreenshotCard
+            imageSource={screenshots[2] ?? null}
+            size="width=1200&height=1080"
+          />
+          <ScreenshotCard
+            imageSource={screenshots[3] ?? null}
+            size="width=880&height=1080"
+          />
+          <ScreenshotCard
+            imageSource={screenshots[4] ?? null}
+            size="width=500&height=1080"
+          />
+          <ScreenshotCard
+            imageSource={screenshots[5] ?? null}
+            size="width=350&height=1080"
+          />
+        </div>
       </div>
     </div>
   );

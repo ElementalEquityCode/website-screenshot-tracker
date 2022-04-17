@@ -11,7 +11,7 @@ const Website = () => {
       <Head>
         <title>{website}</title>
       </Head>
-      <ScreenshotsContainer></ScreenshotsContainer>
+      <ScreenshotsContainer />
     </div>
   );
 };

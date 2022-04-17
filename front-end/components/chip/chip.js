@@ -5,6 +5,7 @@ import Link from "next/link";
 const Chip = (props) => {
   const { link } = props;
   const { children } = props;
+  const { handleClick } = props;
 
   if (!link) {
     return (
@@ -16,7 +17,13 @@ const Chip = (props) => {
   return (
     <div className={styles.websiteNameContainer}>
       <Link href={link}>
-        <h3 className={styles.websiteName}>{children}</h3>
+        {handleClick ? (
+          <h3 className={styles.websiteName} onClick={handleClick}>
+            {children}
+          </h3>
+        ) : (
+          <h3 className={styles.websiteName}>{children}</h3>
+        )}
       </Link>
     </div>
   );
@@ -25,6 +32,7 @@ const Chip = (props) => {
 Chip.propTypes = {
   link: PropTypes.string,
   children: PropTypes.string.isRequired,
+  handleClick: PropTypes.func,
 };
 
 export default Chip;
