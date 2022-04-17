@@ -38,11 +38,7 @@ const Card = (props) => {
               height="30"
             />
           </div>
-          <a
-            className={styles.websiteLink}
-            href="https://elementalweb.design/"
-            target="_blank"
-          >
+          <a className={styles.websiteLink} href="https://elementalweb.design/">
             <p className={styles.companyInfo}>By: Elemental Web Design</p>
           </a>
         </div>

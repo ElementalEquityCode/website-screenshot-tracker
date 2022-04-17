@@ -29,7 +29,7 @@ const ScreenshotsContainer = () => {
 
     sizes.forEach((size, i) => {
       axios
-        .post(`http://localhost:8080/take-screenshot`, {
+        .post(`https://screen-shot-tracker.herokuapp.com/take-screenshot`, {
           size,
           website: homepage,
         })
