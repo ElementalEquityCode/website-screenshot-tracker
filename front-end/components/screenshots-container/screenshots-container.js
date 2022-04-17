@@ -10,6 +10,7 @@ const ScreenshotsContainer = () => {
   const websiteContext = useContext(WebsiteContext);
   const homepage = websiteContext.websiteHomePage;
   const [screenshots, setScreenshots] = useState(["", "", "", "", "", ""]);
+  const [screenshotsFetched, setScreenshotsFetched] = useState(false);
   const sizes = [
     "fullPage=true",
     "width=1920&height=1080",
@@ -35,6 +36,7 @@ const ScreenshotsContainer = () => {
           screenshotsCopy[i] = response.data.imageURL;
           if (i === 5) {
             setScreenshots(screenshotsCopy);
+            setScreenshotsFetched(true);
             setPerformingRequest(false);
           }
         })
@@ -60,6 +62,7 @@ const ScreenshotsContainer = () => {
           <Button
             onClick={fetchScreenshots}
             setButtonLoading={isPerformingRequest}
+            disabled={screenshotsFetched}
           >
             Fetch Screenshots
           </Button>

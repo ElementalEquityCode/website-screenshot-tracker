@@ -9,11 +9,14 @@ const Button = (props) => {
   const { setButtonLoading } = props;
   const { onClick } = props;
   const { children } = props;
+  const { disabled } = props;
 
   const handleButtonClick = () => {
-    if (!isLoading) {
-      onClick();
-      setLoading(!isLoading);
+    if (!disabled) {
+      if (!isLoading) {
+        onClick();
+        setLoading(!isLoading);
+      }
     }
   };
 
@@ -24,7 +27,12 @@ const Button = (props) => {
   });
 
   return (
-    <div className={styles.buttonContainer} onClick={handleButtonClick}>
+    <div
+      className={`${styles.buttonContainer} ${
+        disabled ? `${styles.disabled}` : null
+      }`}
+      onClick={handleButtonClick}
+    >
       {!isLoading ? (
         <div className={styles.buttonTextContainer}>{children}</div>
       ) : (
@@ -44,6 +52,7 @@ Button.propTypes = {
   children: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   setButtonLoading: PropTypes.bool,
+  disabled: PropTypes.bool.isRequired,
 };
 
 export default Button;

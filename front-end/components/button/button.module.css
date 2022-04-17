@@ -10,6 +10,10 @@
   justify-content: center;
 }
 
+.disabled {
+  background-color: rgb(80, 72, 229, 0.5);
+}
+
 @media screen and (max-width: 300px) {
   .buttonContainer {
     width: auto;
@@ -19,6 +23,10 @@
 .buttonContainer:hover {
   background-color: rgb(56, 50, 160);
   cursor: pointer;
+}
+
+.disabled:hover {
+  background-color: rgb(80, 72, 229, 0.5);
 }
 
 .buttonTextContainer {
