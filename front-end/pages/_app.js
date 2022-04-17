@@ -1,5 +1,6 @@
+import Router from "next/router";
 import "../styles/styles.css";
-import { WebsiteContextProvider } from "../contexts/website";
+import WebsiteContext, { WebsiteContextProvider } from "../contexts/website";
 
 function MyApp({ Component, pageProps }) {
   return (

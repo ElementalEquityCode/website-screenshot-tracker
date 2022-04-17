@@ -1,9 +1,11 @@
+import { useContext, useEffect } from "react";
 import Head from "next/head";
 import CardsContainer from "../components/cards-container/cards-container";
 import Card from "../components/card/card";
 import ValenciaTorresLawLogo from "../assets/valencia-torres-law-website-snapshot.jpeg";
 import DoralTitleGroupLogo from "../assets/doral-title-group-website-snapshot.jpeg";
 import JemimahWeiLogo from "../assets/jemma-wei-website-snapshot.jpeg";
+import WebsiteContext from "../contexts/website";
 
 const websiteData = [
   {
@@ -33,6 +35,13 @@ const websiteData = [
 ];
 
 const Home = () => {
+  const websiteContext = useContext(WebsiteContext);
+
+  useEffect(() => {
+    websiteContext.setNewWebsiteName("");
+    websiteContext.setNewWebsiteHomePage("");
+  }, []);
+
   return (
     <div>
       <Head>

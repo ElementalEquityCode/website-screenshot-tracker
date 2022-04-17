@@ -8,7 +8,7 @@ const ScreenshotCard = (props) => {
 
   let sizeString = "";
 
-  if (size === "fullPage") {
+  if (size === "fullPage=true") {
     sizeString = "Full Page";
   } else if (size === "width=1920&height=1080") {
     sizeString = "1920x1080";

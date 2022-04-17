@@ -8,10 +8,12 @@ const WebsiteContextProvider = (props) => {
 
   const setNewWebsiteName = (value) => {
     setCurrentWebsiteName(value);
+    localStorage.setItem("currentWebsiteName", value);
   };
 
   const setNewWebsiteHomePage = (value) => {
     setWebsiteHomePage(value);
+    localStorage.setItem("websiteHomePage", value);
   };
 
   const { children } = props;

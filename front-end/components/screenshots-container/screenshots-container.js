@@ -9,8 +9,11 @@ import WebsiteContext from "../../contexts/website";
 const ScreenshotsContainer = () => {
   const websiteContext = useContext(WebsiteContext);
   const homepage = websiteContext.websiteHomePage;
+
   const [screenshots, setScreenshots] = useState(["", "", "", "", "", ""]);
   const [screenshotsFetched, setScreenshotsFetched] = useState(false);
+  const [isPerformingRequest, setPerformingRequest] = useState(false);
+
   const sizes = [
     "fullPage=true",
     "width=1920&height=1080",
@@ -19,22 +22,28 @@ const ScreenshotsContainer = () => {
     "width=500&height=1080",
     "width=350&height=1080",
   ];
-  const [isPerformingRequest, setPerformingRequest] = useState(false);
 
   const fetchScreenshots = () => {
     setPerformingRequest(true);
-    const screenshotsCopy = [];
+    const screenshotsCopy = ["", "", "", "", "", ""];
 
-    for (let i = 0; i < 6; i += 1) {
+    sizes.forEach((size, i) => {
       axios
         .post(`http://localhost:8080/take-screenshot`, {
-          size: sizes[i],
+          size,
           website: homepage,
         })
         .then((response) => {
-          console.log(response.data);
           screenshotsCopy[i] = response.data.imageURL;
-          if (i === 5) {
+
+          let wereScreenshotsFetched = true;
+
+          for (let index = 0; index < screenshotsCopy.length; index++) {
+            if (!screenshotsCopy[index]) {
+              wereScreenshotsFetched = false;
+            }
+          }
+          if (wereScreenshotsFetched) {
             setScreenshots(screenshotsCopy);
             setScreenshotsFetched(true);
             setPerformingRequest(false);
@@ -46,7 +55,7 @@ const ScreenshotsContainer = () => {
             setPerformingRequest(false);
           }
         });
-    }
+    });
   };
 
   return (
@@ -68,30 +77,15 @@ const ScreenshotsContainer = () => {
           </Button>
         </div>
         <div className={styles.gridContainer}>
-          <ScreenshotCard
-            imageSource={screenshots[0] ?? null}
-            size="fullPage"
-          />
-          <ScreenshotCard
-            imageSource={screenshots[1] ?? null}
-            size="width=1920&height=1080"
-          />
-          <ScreenshotCard
-            imageSource={screenshots[2] ?? null}
-            size="width=1200&height=1080"
-          />
-          <ScreenshotCard
-            imageSource={screenshots[3] ?? null}
-            size="width=880&height=1080"
-          />
-          <ScreenshotCard
-            imageSource={screenshots[4] ?? null}
-            size="width=500&height=1080"
-          />
-          <ScreenshotCard
-            imageSource={screenshots[5] ?? null}
-            size="width=350&height=1080"
-          />
+          {sizes.map((size, index) => {
+            return (
+              <ScreenshotCard
+                key={index}
+                imageSource={screenshots[index]}
+                size={size}
+              />
+            );
+          })}
         </div>
       </div>
     </div>
